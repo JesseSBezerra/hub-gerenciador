@@ -1,0 +1,93 @@
+{
+	"info": {
+		"name": "Usuario Tarefa API",
+		"description": "Collection for Usuario-Tarefa relationship operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vincular Usuario a Tarefa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"usuarioId\": 1,\n  \"tarefaId\": 1,\n  \"dataVinculo\": \"2025-12-23\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario-tarefa/vincular",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "usuario-tarefa", "vincular"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todos os Vinculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuario-tarefa",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "usuario-tarefa"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Vinculos por Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuario-tarefa/usuario/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "usuario-tarefa", "usuario", "1"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Vinculos por Tarefa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuario-tarefa/tarefa/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "usuario-tarefa", "tarefa", "1"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desvincular Usuario de Tarefa",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuario-tarefa/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "usuario-tarefa", "1"]
+				}
+			},
+			"response": []
+		}
+	]
+}

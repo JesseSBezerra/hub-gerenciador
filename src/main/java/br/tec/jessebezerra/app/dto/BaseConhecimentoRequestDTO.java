@@ -1,0 +1,15 @@
+package br.tec.jessebezerra.app.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class BaseConhecimentoRequestDTO {
+    
+    private String nome;
+    private String descricao;
+    private Boolean ativo;
+}

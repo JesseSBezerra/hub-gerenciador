@@ -1,0 +1,25 @@
+{
+	"info": {
+		"name": "Tarefa Report API",
+		"description": "Collection for Tarefa Report generation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gerar Relatório por Sprint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/sprint/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["relatorio", "sprint", "1"]
+				},
+				"description": "Gera um relatório HTML/Excel para uma sprint específica, mostrando todas as tarefas da sprint, responsáveis e progresso por semanas"
+			},
+			"response": []
+		}
+	]
+}

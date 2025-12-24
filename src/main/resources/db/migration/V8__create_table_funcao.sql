@@ -1,0 +1,8 @@
+CREATE TABLE TBG_FUNCAO (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    ativo BOOLEAN NOT NULL,
+    aplicacao_id BIGINT NOT NULL,
+    CONSTRAINT fk_aplicacao FOREIGN KEY (aplicacao_id) REFERENCES TBG_APLICACAO(id) ON DELETE CASCADE
+);

@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "c3d4e5f6-a7b8-9012-cdef-345678901234",
+		"name": "Gerenciador - OpenAI",
+		"description": "Collection para integração com OpenAI para processar questões sobre funções de aplicações",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Processar Questão",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aplicacaoId\": 1,\n  \"questao\": \"Quais são as principais funcionalidades desta aplicação?\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/openai/questao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"openai",
+						"questao"
+					]
+				},
+				"description": "Envia uma questão sobre as funções de uma aplicação para a OpenAI processar. A API busca todas as funções da aplicação e envia como contexto para a IA."
+			},
+			"response": []
+		},
+		{
+			"name": "Processar Questão - Exemplo 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aplicacaoId\": 1,\n  \"questao\": \"Descreva o fluxo de processamento de pagamentos desta aplicação\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/openai/questao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"openai",
+						"questao"
+					]
+				},
+				"description": "Exemplo de questão mais específica sobre o fluxo de processamento"
+			},
+			"response": []
+		},
+		{
+			"name": "Processar Questão - Exemplo 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aplicacaoId\": 1,\n  \"questao\": \"Liste todas as funções ativas e suas responsabilidades\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/openai/questao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"openai",
+						"questao"
+					]
+				},
+				"description": "Exemplo de questão para listar funções ativas"
+			},
+			"response": []
+		}
+	]
+}

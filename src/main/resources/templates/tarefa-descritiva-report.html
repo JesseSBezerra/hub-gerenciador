@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório Descritivo de Tarefas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        .header-col-historia {
+            background-color: #808080;
+            color: white;
+            font-weight: bold;
+            width: 20%;
+        }
+        .header-col-tarefa {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            width: 20%;
+        }
+        .header-col-titulo {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            width: 25%;
+        }
+        .header-col-descricao {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            width: 35%;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th class="header-col-historia">HISTORIA</th>
+                <th class="header-col-tarefa">TAREFA</th>
+                <th class="header-col-titulo">TÍTULO SUGERIDO</th>
+                <th class="header-col-descricao">DESCRIÇÃO SUGERIDA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Mensagem quando não há dados -->
+            <tr th:if="${#lists.isEmpty(report.historias)}">
+                <td colspan="4" class="empty-message">
+                    Nenhuma tarefa encontrada nesta sprint. Adicione tarefas à sprint usando o endpoint /api/sprint-items
+                </td>
+            </tr>
+            
+            <th:block th:each="historia, historiaIter : ${report.historias}">
+                <!-- Caso a historia não tenha subtarefas -->
+                <tr th:if="${#lists.isEmpty(historia.subtarefas)}">
+                    <td th:text="${historia.historiaNome}"></td>
+                    <td colspan="3" class="empty-message">Sem subtarefas</td>
+                </tr>
+                
+                <th:block th:each="tarefa, tarefaIter : ${historia.subtarefas}">
+                    <tr>
+                        <!-- HISTORIA - rowspan para todas as subtarefas desta historia -->
+                        <td th:if="${tarefaIter.first}" 
+                            th:rowspan="${#lists.size(historia.subtarefas)}"
+                            th:text="${historia.historiaNome}"></td>
+                        
+                        <!-- TAREFA -->
+                        <td th:text="${tarefa.nomeTarefa}"></td>
+                        
+                        <!-- TÍTULO SUGERIDO -->
+                        <td th:text="${tarefa.tituloSugerido != null ? tarefa.tituloSugerido : '-'}"></td>
+                        
+                        <!-- DESCRIÇÃO SUGERIDA -->
+                        <td th:text="${tarefa.tarefaSugerida != null ? tarefa.tarefaSugerida : '-'}"></td>
+                    </tr>
+                </th:block>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>

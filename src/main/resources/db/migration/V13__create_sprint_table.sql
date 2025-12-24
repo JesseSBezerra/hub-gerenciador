@@ -1,0 +1,5 @@
+CREATE TABLE TBG_SPRINT (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT
+);

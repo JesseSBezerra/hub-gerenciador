@@ -1,0 +1,102 @@
+{
+	"info": {
+		"name": "Sprint API",
+		"description": "Collection for Sprint CRUD operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Sprint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Sprint 1 - Dezembro 2025\",\n  \"descricao\": \"Primeira sprint do projeto focada em autenticação e configuração inicial\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sprints",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "sprints"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Sprints",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/sprints",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "sprints"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sprint by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/sprints/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "sprints", "1"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Sprint",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Sprint 1 - Dezembro 2025 (Atualizada)\",\n  \"descricao\": \"Sprint atualizada com novos objetivos\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sprints/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "sprints", "1"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Sprint",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/sprints/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "sprints", "1"]
+				}
+			},
+			"response": []
+		}
+	]
+}

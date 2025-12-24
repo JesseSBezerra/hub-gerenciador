@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "d4e5f6a7-b8c9-0123-def4-567890123456",
+		"name": "Gerenciador - Tarefa",
+		"description": "Collection para gerenciamento de Tarefas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Tarefa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Implementar autenticação\",\n  \"dataCriacao\": \"2025-12-23\",\n  \"complexidade\": \"MEDIA\",\n  \"descricao\": \"Implementar sistema de autenticação JWT\",\n  \"tipo\": \"TAREFA\",\n  \"status\": \"PLANEJADO\",\n  \"aplicacaoId\": 1,\n  \"baseConhecimentoIds\": [1, 2]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					]
+				},
+				"description": "Cria uma nova tarefa. Complexidades: MUITO_SIMPLES, SIMPLES, MEDIA, COMPLEXA. Tipos: TAREFA, HISTORIA, SUB, FEATURE. Status: PLANEJADO, INICIADO, FINALIZADO, CANCELADO, IMPEDIDO"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Subtarefa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Configurar JWT\",\n  \"dataCriacao\": \"2025-12-23\",\n  \"complexidade\": \"SIMPLES\",\n  \"descricao\": \"Configurar biblioteca JWT no projeto\",\n  \"tipo\": \"SUB\",\n  \"status\": \"PLANEJADO\",\n  \"tarefaPaiId\": 1,\n  \"aplicacaoId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					]
+				},
+				"description": "Cria uma subtarefa vinculada a uma tarefa pai"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Tarefas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					]
+				},
+				"description": "Lista todas as tarefas cadastradas com data estimada calculada"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Tarefas por Tipo - HISTORIA",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas?tipo=HISTORIA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					],
+					"query": [
+						{
+							"key": "tipo",
+							"value": "HISTORIA"
+						}
+					]
+				},
+				"description": "Lista apenas tarefas do tipo HISTORIA"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Tarefas por Tipo - TAREFA",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas?tipo=TAREFA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					],
+					"query": [
+						{
+							"key": "tipo",
+							"value": "TAREFA"
+						}
+					]
+				},
+				"description": "Lista apenas tarefas do tipo TAREFA"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Tarefas por Tipo - FEATURE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas?tipo=FEATURE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					],
+					"query": [
+						{
+							"key": "tipo",
+							"value": "FEATURE"
+						}
+					]
+				},
+				"description": "Lista apenas tarefas do tipo FEATURE"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Tarefas por Tipo - SUB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas?tipo=SUB",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas"
+					],
+					"query": [
+						{
+							"key": "tipo",
+							"value": "SUB"
+						}
+					]
+				},
+				"description": "Lista apenas subtarefas (tipo SUB)"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Tarefa por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas",
+						"1"
+					]
+				},
+				"description": "Busca uma tarefa específica pelo ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Tarefa",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Implementar autenticação JWT\",\n  \"dataCriacao\": \"2025-12-23\",\n  \"complexidade\": \"COMPLEXA\",\n  \"descricao\": \"Implementar sistema completo de autenticação JWT com refresh token\",\n  \"tipo\": \"TAREFA\",\n  \"status\": \"INICIADO\",\n  \"aplicacaoId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas",
+						"1"
+					]
+				},
+				"description": "Atualiza uma tarefa existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Tarefa",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas",
+						"1"
+					]
+				},
+				"description": "Deleta uma tarefa pelo ID"
+			},
+			"response": []
+		}
+	]
+}

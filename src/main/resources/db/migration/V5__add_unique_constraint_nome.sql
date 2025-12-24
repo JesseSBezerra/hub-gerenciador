@@ -1,0 +1,2 @@
+ALTER TABLE TBG_USER
+ADD CONSTRAINT uk_user_nome UNIQUE (nome);

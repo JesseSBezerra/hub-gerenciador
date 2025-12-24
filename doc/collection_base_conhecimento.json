@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "e5f6a7b8-c9d0-1234-ef56-678901234567",
+		"name": "Gerenciador - Base Conhecimento",
+		"description": "Collection para gerenciamento de Base de Conhecimento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Base Conhecimento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Guia de Arquitetura\",\n  \"descricao\": \"Documentação completa sobre a arquitetura do sistema\",\n  \"ativo\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/base-conhecimento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"base-conhecimento"
+					]
+				},
+				"description": "Cria uma nova base de conhecimento"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Bases Conhecimento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/base-conhecimento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"base-conhecimento"
+					]
+				},
+				"description": "Lista todas as bases de conhecimento cadastradas"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Base Conhecimento por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/base-conhecimento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"base-conhecimento",
+						"1"
+					]
+				},
+				"description": "Busca uma base de conhecimento específica pelo ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Base Conhecimento",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Guia de Arquitetura - Atualizado\",\n  \"descricao\": \"Documentação completa e atualizada sobre a arquitetura do sistema\",\n  \"ativo\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/base-conhecimento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"base-conhecimento",
+						"1"
+					]
+				},
+				"description": "Atualiza uma base de conhecimento existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Base Conhecimento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/base-conhecimento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"base-conhecimento",
+						"1"
+					]
+				},
+				"description": "Deleta uma base de conhecimento pelo ID"
+			},
+			"response": []
+		}
+	]
+}

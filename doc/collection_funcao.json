@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+		"name": "Gerenciador - Função",
+		"description": "Collection para gerenciamento de Funções",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Função",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Processar Pagamento\",\n  \"descricao\": \"Função responsável por processar pagamentos via gateway\",\n  \"ativo\": true,\n  \"aplicacaoId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes"
+					]
+				},
+				"description": "Cria uma nova função vinculada a uma aplicação"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Funções",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes"
+					]
+				},
+				"description": "Lista todas as funções cadastradas"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Função por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes",
+						"1"
+					]
+				},
+				"description": "Busca uma função específica pelo ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Funções por Aplicação",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes/aplicacao/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes",
+						"aplicacao",
+						"1"
+					]
+				},
+				"description": "Lista todas as funções de uma aplicação específica"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Função",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Processar Pagamento v2\",\n  \"descricao\": \"Função responsável por processar pagamentos via gateway - versão atualizada\",\n  \"ativo\": false,\n  \"aplicacaoId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes",
+						"1"
+					]
+				},
+				"description": "Atualiza uma função existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Função",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/funcoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"funcoes",
+						"1"
+					]
+				},
+				"description": "Deleta uma função pelo ID"
+			},
+			"response": []
+		}
+	]
+}

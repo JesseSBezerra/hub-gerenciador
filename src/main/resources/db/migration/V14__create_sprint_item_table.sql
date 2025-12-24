@@ -1,0 +1,8 @@
+CREATE TABLE TBG_SPRINT_ITEM (
+    id BIGSERIAL PRIMARY KEY,
+    sprint_id BIGINT NOT NULL,
+    tarefa_id BIGINT NOT NULL,
+    CONSTRAINT fk_sprint FOREIGN KEY (sprint_id) REFERENCES TBG_SPRINT(id) ON DELETE CASCADE,
+    CONSTRAINT fk_tarefa FOREIGN KEY (tarefa_id) REFERENCES TBG_TAREFA(id) ON DELETE CASCADE,
+    CONSTRAINT uk_sprint_tarefa UNIQUE (sprint_id, tarefa_id)
+);

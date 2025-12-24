@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Gerenciador - Aplicação",
+		"description": "Collection para gerenciamento de Aplicações",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Aplicação",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"API de Pagamentos\",\n  \"repo\": \"https://github.com/empresa/api-pagamentos\",\n  \"tipo\": \"API\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/aplicacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"aplicacoes"
+					]
+				},
+				"description": "Cria uma nova aplicação. Tipos disponíveis: API, WORKER, STEP_FUNCTION"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Aplicações",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/aplicacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"aplicacoes"
+					]
+				},
+				"description": "Lista todas as aplicações cadastradas"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Aplicação por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/aplicacoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"aplicacoes",
+						"1"
+					]
+				},
+				"description": "Busca uma aplicação específica pelo ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Aplicação",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"API de Pagamentos v2\",\n  \"repo\": \"https://github.com/empresa/api-pagamentos-v2\",\n  \"tipo\": \"API\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/aplicacoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"aplicacoes",
+						"1"
+					]
+				},
+				"description": "Atualiza uma aplicação existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Aplicação",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/aplicacoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"aplicacoes",
+						"1"
+					]
+				},
+				"description": "Deleta uma aplicação pelo ID"
+			},
+			"response": []
+		}
+	]
+}
