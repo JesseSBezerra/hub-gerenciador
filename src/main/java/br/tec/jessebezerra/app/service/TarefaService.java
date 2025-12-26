@@ -169,6 +169,12 @@ public class TarefaService {
     public void delete(Long id) {
         tarefaRepository.deleteById(id);
     }
+
+    public List<TarefaResponseDTO> findByTarefaPaiId(Long tarefaPaiId) {
+        return tarefaRepository.findByTarefaPaiId(tarefaPaiId).stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
     
     private TarefaResponseDTO toResponseDTO(Tarefa tarefa) {
         TarefaResponseDTO dto = new TarefaResponseDTO();

@@ -55,4 +55,10 @@ public class TarefaController {
         tarefaService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/tarefa-pai/{tarefaPaiId}")
+    public ResponseEntity<List<TarefaResponseDTO>> findByTarefaPaiId(@PathVariable Long tarefaPaiId) {
+        List<TarefaResponseDTO> tarefas = tarefaService.findByTarefaPaiId(tarefaPaiId);
+        return ResponseEntity.ok(tarefas);
+    }
 }
