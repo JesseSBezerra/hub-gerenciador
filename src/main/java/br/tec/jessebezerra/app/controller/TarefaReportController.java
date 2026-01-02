@@ -5,6 +5,7 @@ import br.tec.jessebezerra.app.dto.TarefaReportDTO;
 import br.tec.jessebezerra.app.service.TarefaDescritivaReportService;
 import br.tec.jessebezerra.app.service.TarefaReportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,5 +32,17 @@ public class TarefaReportController {
         TarefaDescritivaReportDTO report = tarefaDescritivaReportService.gerarRelatorioDescritivo(id);
         model.addAttribute("report", report);
         return "tarefa-descritiva-report";
+    }
+
+    @GetMapping("/json/sprint/{id}")
+    public ResponseEntity<TarefaReportDTO> gerarRelatorioSprintJson(@PathVariable Long id) {
+        TarefaReportDTO report = tarefaReportService.gerarRelatorio(id);
+        return ResponseEntity.ok(report);
+    }
+
+    @GetMapping("/json/descritivo-tarefa/sprint/{id}")
+    public ResponseEntity<TarefaDescritivaReportDTO> gerarRelatorioDescritivoSprintJson(@PathVariable Long id) {
+        TarefaDescritivaReportDTO report = tarefaDescritivaReportService.gerarRelatorioDescritivo(id);
+        return ResponseEntity.ok(report);
     }
 }

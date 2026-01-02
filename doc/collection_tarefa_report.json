@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Gerar Relatório por Sprint",
+			"name": "Gerar Relatório por Sprint (HTML)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -17,7 +17,55 @@
 					"port": "8080",
 					"path": ["relatorio", "sprint", "1"]
 				},
-				"description": "Gera um relatório HTML/Excel para uma sprint específica, mostrando todas as tarefas da sprint, responsáveis e progresso por semanas"
+				"description": "Gera um relatório HTML para uma sprint específica, mostrando todas as tarefas da sprint, responsáveis e progresso por semanas"
+			},
+			"response": []
+		},
+		{
+			"name": "Gerar Relatório por Sprint (JSON)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/json/sprint/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["relatorio", "json", "sprint", "1"]
+				},
+				"description": "Gera um relatório JSON para uma sprint específica, mostrando todas as tarefas da sprint, responsáveis e progresso por semanas (semana1, semana2, semana3, semana4)"
+			},
+			"response": []
+		},
+		{
+			"name": "Gerar Relatório Descritivo por Sprint (HTML)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/descritivo-tarefa/sprint/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["relatorio", "descritivo-tarefa", "sprint", "1"]
+				},
+				"description": "Gera um relatório HTML descritivo para uma sprint específica, mostrando histórias, tarefas, títulos sugeridos e descrições sugeridas"
+			},
+			"response": []
+		},
+		{
+			"name": "Gerar Relatório Descritivo por Sprint (JSON)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/json/descritivo-tarefa/sprint/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["relatorio", "json", "descritivo-tarefa", "sprint", "1"]
+				},
+				"description": "Gera um relatório JSON descritivo para uma sprint específica, mostrando histórias, tarefas, títulos sugeridos e descrições sugeridas"
 			},
 			"response": []
 		}

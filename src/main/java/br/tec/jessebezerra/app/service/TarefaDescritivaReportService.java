@@ -3,6 +3,7 @@ package br.tec.jessebezerra.app.service;
 import br.tec.jessebezerra.app.dto.HistoriaDescritivaGroupDTO;
 import br.tec.jessebezerra.app.dto.TarefaDescritivaItemDTO;
 import br.tec.jessebezerra.app.dto.TarefaDescritivaReportDTO;
+import br.tec.jessebezerra.app.dto.TarefaQuestionarioResponseDTO;
 import br.tec.jessebezerra.app.model.entity.Sprint;
 import br.tec.jessebezerra.app.model.entity.SprintItem;
 import br.tec.jessebezerra.app.model.entity.Tarefa;
@@ -24,6 +25,7 @@ public class TarefaDescritivaReportService {
     private final SprintRepository sprintRepository;
     private final SprintItemRepository sprintItemRepository;
     private final TarefaRepository tarefaRepository;
+    private final TarefaQuestionarioService tarefaQuestionarioService;
 
     public TarefaDescritivaReportDTO gerarRelatorioDescritivo(Long sprintId) {
         log.info("Gerando relatório descritivo para sprint ID: {}", sprintId);
@@ -56,8 +58,16 @@ public class TarefaDescritivaReportService {
                 item.setNomeTarefa(subtarefa.getNome());
                 item.setTituloSugerido(subtarefa.getTituloSugerido());
                 item.setTarefaSugerida(subtarefa.getTarefaSugerida());
+                item.setBeneficioProduto(subtarefa.getBeneficioProduto());
+                item.setBeneficioAplicacao(subtarefa.getBeneficioAplicacao());
                 
-                log.info("    Subtarefa: {}", subtarefa.getNome());
+                List<TarefaQuestionarioResponseDTO> questionarios = tarefaQuestionarioService.findByTarefaId(subtarefa.getId());
+                if (!questionarios.isEmpty()) {
+                    item.setQuestionarios(questionarios);
+                    log.info("    Subtarefa: {} - {} questionários encontrados", subtarefa.getNome(), questionarios.size());
+                } else {
+                    log.info("    Subtarefa: {}", subtarefa.getNome());
+                }
                 
                 subtarefas.add(item);
             }

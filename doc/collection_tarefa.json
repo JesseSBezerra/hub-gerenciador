@@ -269,6 +269,29 @@
 				"description": "Deleta uma tarefa pelo ID"
 			},
 			"response": []
+		},
+		{
+			"name": "Gerar Questionário por Tarefa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tarefas/1/questionario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarefas",
+						"1",
+						"questionario"
+					]
+				},
+				"description": "Gera um questionário pertinente baseado na tarefa, incluindo descrição, título sugerido, aplicação, funções vinculadas e base de conhecimento. A IA cria perguntas relevantes para validar o entendimento da tarefa."
+			},
+			"response": []
 		}
 	]
 }

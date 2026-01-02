@@ -1,0 +1,2 @@
+ALTER TABLE TBG_TAREFA ADD COLUMN beneficio_produto TEXT;
+ALTER TABLE TBG_TAREFA ADD COLUMN beneficio_aplicacao TEXT;

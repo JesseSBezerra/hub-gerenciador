@@ -1,6 +1,7 @@
 package br.tec.jessebezerra.app.integration.openai.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,6 +57,7 @@ public class OpenAIRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class JsonSchema {
         private String type;
         private Properties properties;
@@ -66,15 +68,24 @@ public class OpenAIRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Properties {
         private Property titulo;
         private Property descricao;
+        private Property perguntas;
+        private Property pergunta;
+        private Property tipo;
+        private Property opcoes;
+        private Property beneficioProduto;
+        private Property beneficioAplicacao;
     }
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Property {
         private String type;
+        private JsonSchema items;
     }
 }

@@ -1,17 +1,23 @@
 package br.tec.jessebezerra.app.service;
 
 import br.tec.jessebezerra.app.dto.BaseConhecimentoResponseDTO;
+import br.tec.jessebezerra.app.dto.BeneficiosResponseDTO;
+import br.tec.jessebezerra.app.dto.EspecificacaoRequestDTO;
+import br.tec.jessebezerra.app.dto.EspecificacaoResponseDTO;
 import br.tec.jessebezerra.app.dto.FuncaoResponseDTO;
+import br.tec.jessebezerra.app.dto.TarefaQuestionarioResponseDTO;
 import br.tec.jessebezerra.app.dto.TarefaRequestDTO;
 import br.tec.jessebezerra.app.dto.TarefaResponseDTO;
 import br.tec.jessebezerra.app.dto.TarefaSugeridaDTO;
 import br.tec.jessebezerra.app.integration.openai.OpenAIService;
 import br.tec.jessebezerra.app.model.entity.Aplicacao;
 import br.tec.jessebezerra.app.model.entity.BaseConhecimento;
+import br.tec.jessebezerra.app.model.entity.Projeto;
 import br.tec.jessebezerra.app.model.entity.Tarefa;
 import br.tec.jessebezerra.app.model.enums.Tipo;
 import br.tec.jessebezerra.app.repository.AplicacaoRepository;
 import br.tec.jessebezerra.app.repository.BaseConhecimentoRepository;
+import br.tec.jessebezerra.app.repository.ProjetoRepository;
 import br.tec.jessebezerra.app.repository.TarefaRepository;
 import br.tec.jessebezerra.app.service.FuncaoService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +33,9 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
     private final AplicacaoRepository aplicacaoRepository;
     private final BaseConhecimentoRepository baseConhecimentoRepository;
+    private final ProjetoRepository projetoRepository;
     private final FuncaoService funcaoService;
+    private final TarefaQuestionarioService tarefaQuestionarioService;
     private final OpenAIService openAIService;
 
     public TarefaResponseDTO save(TarefaRequestDTO dto) {
@@ -38,6 +46,8 @@ public class TarefaService {
         tarefa.setDescricao(dto.getDescricao());
         tarefa.setTipo(dto.getTipo());
         tarefa.setStatus(dto.getStatus());
+        tarefa.setBeneficioProduto(dto.getBeneficioProduto());
+        tarefa.setBeneficioAplicacao(dto.getBeneficioAplicacao());
         
         if (dto.getTarefaPaiId() != null) {
             Tarefa tarefaPai = tarefaRepository.findById(dto.getTarefaPaiId())
@@ -50,6 +60,12 @@ public class TarefaService {
             aplicacao = aplicacaoRepository.findById(dto.getAplicacaoId())
                     .orElseThrow(() -> new RuntimeException("Aplicacao not found with id: " + dto.getAplicacaoId()));
             tarefa.setAplicacao(aplicacao);
+        }
+        
+        if (dto.getProjetoId() != null) {
+            Projeto projeto = projetoRepository.findById(dto.getProjetoId())
+                    .orElseThrow(() -> new RuntimeException("Projeto not found with id: " + dto.getProjetoId()));
+            tarefa.setProjeto(projeto);
         }
         
         if (dto.getBaseConhecimentoIds() != null && !dto.getBaseConhecimentoIds().isEmpty()) {
@@ -110,6 +126,8 @@ public class TarefaService {
                     existingTarefa.setDescricao(dto.getDescricao());
                     existingTarefa.setTipo(dto.getTipo());
                     existingTarefa.setStatus(dto.getStatus());
+                    existingTarefa.setBeneficioProduto(dto.getBeneficioProduto());
+                    existingTarefa.setBeneficioAplicacao(dto.getBeneficioAplicacao());
                     
                     if (dto.getTarefaPaiId() != null) {
                         Tarefa tarefaPai = tarefaRepository.findById(dto.getTarefaPaiId())
@@ -126,6 +144,14 @@ public class TarefaService {
                         existingTarefa.setAplicacao(aplicacao);
                     } else {
                         existingTarefa.setAplicacao(null);
+                    }
+                    
+                    if (dto.getProjetoId() != null) {
+                        Projeto projeto = projetoRepository.findById(dto.getProjetoId())
+                                .orElseThrow(() -> new RuntimeException("Projeto not found with id: " + dto.getProjetoId()));
+                        existingTarefa.setProjeto(projeto);
+                    } else {
+                        existingTarefa.setProjeto(null);
                     }
                     
                     existingTarefa.getBaseConhecimentos().clear();
@@ -175,6 +201,29 @@ public class TarefaService {
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
     }
+
+    public EspecificacaoResponseDTO gerarEspecificacao(EspecificacaoRequestDTO request) {
+        Aplicacao aplicacao = aplicacaoRepository.findById(request.getAplicacaoId())
+                .orElseThrow(() -> new RuntimeException("Aplicacao not found with id: " + request.getAplicacaoId()));
+        
+        List<FuncaoResponseDTO> funcoes = funcaoService.findByAplicacaoId(aplicacao.getId());
+        
+        TarefaSugeridaDTO sugestao = openAIService.gerarTarefaSugeridaComAplicacao(
+            "", 
+            request.getDescricao(), 
+            aplicacao.getNome(), 
+            aplicacao.getRepo(), 
+            funcoes
+        );
+        
+        EspecificacaoResponseDTO response = new EspecificacaoResponseDTO();
+        if (sugestao != null) {
+            response.setTituloSugerido(sugestao.getTitulo());
+            response.setDescricaoSugerida(sugestao.getDescricao());
+        }
+        
+        return response;
+    }
     
     private TarefaResponseDTO toResponseDTO(Tarefa tarefa) {
         TarefaResponseDTO dto = new TarefaResponseDTO();
@@ -197,8 +246,15 @@ public class TarefaService {
             dto.setAplicacaoNome(tarefa.getAplicacao().getNome());
         }
         
+        if (tarefa.getProjeto() != null) {
+            dto.setProjetoId(tarefa.getProjeto().getId());
+            dto.setProjetoNome(tarefa.getProjeto().getNome());
+        }
+        
         dto.setTarefaSugerida(tarefa.getTarefaSugerida());
         dto.setTituloSugerido(tarefa.getTituloSugerido());
+        dto.setBeneficioProduto(tarefa.getBeneficioProduto());
+        dto.setBeneficioAplicacao(tarefa.getBeneficioAplicacao());
         
         if (tarefa.getBaseConhecimentos() != null && !tarefa.getBaseConhecimentos().isEmpty()) {
             List<BaseConhecimentoResponseDTO> basesDTO = tarefa.getBaseConhecimentos().stream()
@@ -208,5 +264,41 @@ public class TarefaService {
         }
         
         return dto;
+    }
+
+    public BeneficiosResponseDTO gerarBeneficios(Long id) {
+        Tarefa tarefa = tarefaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tarefa not found with id: " + id));
+        
+        String nomeTarefa = tarefa.getNome();
+        String descricaoTarefa = tarefa.getDescricao();
+        
+        String aplicacaoNome = null;
+        String aplicacaoRepo = null;
+        List<FuncaoResponseDTO> funcoes = null;
+        
+        if (tarefa.getAplicacao() != null) {
+            Aplicacao aplicacao = tarefa.getAplicacao();
+            aplicacaoNome = aplicacao.getNome();
+            aplicacaoRepo = aplicacao.getRepo();
+            funcoes = funcaoService.findByAplicacaoId(aplicacao.getId());
+        }
+        
+        String projetoNome = null;
+        if (tarefa.getProjeto() != null) {
+            projetoNome = tarefa.getProjeto().getNome();
+        }
+        
+        List<TarefaQuestionarioResponseDTO> questionarios = tarefaQuestionarioService.findByTarefaId(id);
+        
+        return openAIService.gerarBeneficios(
+            nomeTarefa,
+            descricaoTarefa,
+            aplicacaoNome,
+            aplicacaoRepo,
+            funcoes,
+            projetoNome,
+            questionarios
+        );
     }
 }

@@ -1,0 +1,7 @@
+CREATE TABLE TBG_TAREFA_QUESTIONARIO (
+    id BIGSERIAL PRIMARY KEY,
+    tarefa_id BIGINT NOT NULL,
+    pergunta TEXT NOT NULL,
+    resposta TEXT,
+    CONSTRAINT fk_tarefa_questionario FOREIGN KEY (tarefa_id) REFERENCES TBG_TAREFA(id) ON DELETE CASCADE
+);

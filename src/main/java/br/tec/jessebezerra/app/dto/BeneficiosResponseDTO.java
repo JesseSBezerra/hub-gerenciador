@@ -4,16 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TarefaDescritivaItemDTO {
-    private String nomeTarefa;
-    private String tituloSugerido;
-    private String tarefaSugerida;
+public class BeneficiosResponseDTO {
     private String beneficioProduto;
     private String beneficioAplicacao;
-    private List<TarefaQuestionarioResponseDTO> questionarios;
 }

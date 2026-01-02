@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "TBG_FUNCAO")
+@Table(name = "TBG_PROJETO")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Funcao {
+public class Projeto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +25,6 @@ public class Funcao {
     @Column(columnDefinition = "TEXT")
     private String descricao;
 
-    @Column(nullable = false)
-    private Boolean ativo;
-
-    @ManyToOne
-    @JoinColumn(name = "aplicacao_id", nullable = false)
-    private Aplicacao aplicacao; 
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalhesProjeto> detalhes = new ArrayList<>();
 }

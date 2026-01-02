@@ -27,7 +27,11 @@ public class TarefaResponseDTO {
     private LocalDate dataEstimada;
     private Long aplicacaoId;
     private String aplicacaoNome;
+    private Long projetoId;
+    private String projetoNome;
     private String tarefaSugerida;
     private String tituloSugerido;
+    private String beneficioProduto;
+    private String beneficioAplicacao;
     private List<BaseConhecimentoResponseDTO> baseConhecimentos;
 }

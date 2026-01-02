@@ -23,5 +23,8 @@ public class TarefaRequestDTO {
     private Long tarefaPaiId;
     private Status status;
     private Long aplicacaoId;
+    private Long projetoId;
+    private String beneficioProduto;
+    private String beneficioAplicacao;
     private List<Long> baseConhecimentoIds;
 }

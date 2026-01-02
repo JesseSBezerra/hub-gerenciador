@@ -52,11 +52,21 @@ public class Tarefa {
     @JoinColumn(name = "aplicacao_id")
     private Aplicacao aplicacao;
 
+    @ManyToOne
+    @JoinColumn(name = "projeto_id")
+    private Projeto projeto;
+
     @Column(columnDefinition = "TEXT")
     private String tarefaSugerida;
 
     @Column(length = 255)
     private String tituloSugerido;
+
+    @Column(columnDefinition = "TEXT")
+    private String beneficioProduto;
+
+    @Column(columnDefinition = "TEXT")
+    private String beneficioAplicacao;
 
     @ManyToMany
     @JoinTable(
